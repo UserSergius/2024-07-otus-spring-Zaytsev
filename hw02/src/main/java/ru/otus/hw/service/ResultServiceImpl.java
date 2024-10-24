@@ -13,7 +13,7 @@ public class ResultServiceImpl implements ResultService {
     private final IOService ioService;
 
     @Autowired
-    ResultServiceImpl(TestConfig testConfig, IOService ioService) {
+    public ResultServiceImpl(TestConfig testConfig, IOService ioService) {
         this.testConfig = testConfig;
         this.ioService = ioService;
     }
