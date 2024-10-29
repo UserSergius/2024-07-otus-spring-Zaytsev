@@ -1,9 +1,9 @@
 package ru.otus.hw.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
+import ru.otus.hw.domain.Question;
 import ru.otus.hw.domain.Student;
 import ru.otus.hw.domain.TestResult;
 
@@ -16,7 +16,6 @@ public class TestServiceImpl implements TestService {
 
     private final QuestionDao questionDao;
 
-    @Autowired
     public TestServiceImpl(IOService ioService, QuestionDao questionDao) {
         this.ioService = ioService;
         this.questionDao = questionDao;
@@ -27,16 +26,8 @@ public class TestServiceImpl implements TestService {
         ioService.printLine("");
         ioService.printFormattedLine("Please answer the questions below%n");
         var questions = questionDao.findAll();
-        var testResult = new TestResult(student);
 
-        for (var question: questions) {
-            var listAnswers = question.answers();
-            ioService.printLine(question.text() + "\n");
-            outputAnswer(listAnswers);
-            var answerNumber = getNumberAnswer(listAnswers.size());
-            testResult.applyAnswer(question, isAnswerValid(listAnswers, answerNumber));
-        }
-        return testResult;
+        return getTestResult(questions, student);
     }
 
     private void outputAnswer(List<Answer> answers) {
@@ -56,5 +47,15 @@ public class TestServiceImpl implements TestService {
         return listAnswers.get(numberAnswer).isCorrect();
     }
 
-
+    private TestResult getTestResult(List<Question> questions, Student student) {
+        var testResult = new TestResult(student);
+        for (var question: questions) {
+            var listAnswers = question.answers();
+            ioService.printLine(question.text() + "\n");
+            outputAnswer(listAnswers);
+            var answerNumber = getNumberAnswer(listAnswers.size());
+            testResult.applyAnswer(question, isAnswerValid(listAnswers, answerNumber));
+        }
+        return testResult;
+    }
 }
