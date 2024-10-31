@@ -38,7 +38,7 @@ public class CsvQuestionDaoTest {
     @Test
     void findAll_error() {
         final var path = "src.question.csv";
-        final var expectedException = "An error occurred while reading the file with the questions.null";
+        final var expectedException = "An error occurred while reading the file with the questions.";
 
         Mockito.when(provider.getTestFileName()).thenReturn(path);
         final var exception = Assertions.assertThrows(QuestionReadException.class, () -> dao.findAll());

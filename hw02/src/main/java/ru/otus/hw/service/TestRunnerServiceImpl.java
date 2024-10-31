@@ -1,6 +1,5 @@
 package ru.otus.hw.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +11,6 @@ public class TestRunnerServiceImpl implements TestRunnerService {
 
     private final ResultService resultService;
 
-    @Autowired
     public TestRunnerServiceImpl(TestService testService, StudentService studentService, ResultService resultService) {
         this.testService = testService;
         this.studentService = studentService;

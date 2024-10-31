@@ -38,8 +38,7 @@ public class CsvQuestionDao implements QuestionDao {
 
           return csv.stream().map(QuestionDto::toDomainObject).collect(Collectors.toList());
         } catch (IOException | NullPointerException e) {
-            throw new QuestionReadException("An error occurred while reading the file with the questions."
-                    + e.getCause());
+            throw new QuestionReadException("An error occurred while reading the file with the questions.", e);
         }
     }
 }
