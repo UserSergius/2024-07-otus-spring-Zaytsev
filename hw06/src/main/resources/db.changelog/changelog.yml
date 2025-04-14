@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db.changelog/2025-04-01--Create-tables.yml
+  - include:
+      file: db.changelog/2025-04-01--Insert-data.yml
